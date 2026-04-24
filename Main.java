@@ -20,18 +20,36 @@ public class Main{
         double salary = scanner.nextDouble();
 
         String currency = "€";
+        ArrayList<String> expenseNames = new ArrayList<>();
+        ArrayList<Double> expenseAmounts = new ArrayList<>();
+
         System.out.println("Your salary is " + currency + salary);
 
-        System.out.println("Do you have any fixed expenses (yes/no)");
+        System.out.print("Do you have any fixed expenses (yes/no)");
         String answer = scanner.next();
 
         if (answer.equals("yes")) {
-            System.out.println("Enter the name of the expense: ");
-            System.out.println("Enter the amount: ");
+            String anotherExpense = "yes";
+            scanner.nextLine(); //fixes the buffer after salary input
+            do {
+                System.out.print("Enter the name of the expense: ");
+                String expenseName = scanner.nextLine();
+                System.out.print("Enter the amount: ");
+                Double expenseAmount = scanner.nextDouble();
+                scanner.nextLine(); //clears buffer after each amount
+                expenseNames.add(expenseName);
+                expenseAmounts.add(expenseAmount);
+                System.out.print("Do you have another expense? (yes/no)");
+                anotherExpense = scanner.nextLine();
+
+            } while (anotherExpense.equals("yes"));
+
         }
         else {
             System.out.println("No fixed expense added.");
         }
+            
+        
 
 
 
