@@ -19,11 +19,11 @@ public class Main{
         System.out.print("Enter your Income: ");
         double salary = scanner.nextDouble();
 
-        String currency = "€";
+        String currency = "EUR";
         ArrayList<String> expenseNames = new ArrayList<>();
         ArrayList<Double> expenseAmounts = new ArrayList<>();
 
-        System.out.println("Your salary is " + currency + salary);
+        System.out.println("Your salary is " + salary + currency);
 
         System.out.print("Do you have any fixed expenses (yes/no)");
         String answer = scanner.next();
@@ -44,11 +44,23 @@ public class Main{
 
             } while (anotherExpense.equals("yes"));
 
-        }
-        else {
+        } else {
             System.out.println("No fixed expense added.");
         }
-            
+        
+        System.out.println("\n--- MONTHLY SUMMARY ---");
+        System.out.println("Income: " + currency + " " + salary);
+
+        System.out.println("Fixed Expenses:");
+        for (int i = 0; i < expenseNames.size(); i++) {
+            System.out.println("  - " + expenseNames.get(i) + ": " + currency + " " + expenseAmounts.get(i));
+        }
+        double totalExpenses = 0;
+        for (int i = 0; i < expenseAmounts.size(); i++) {
+            totalExpenses += expenseAmounts.get(i);
+        }
+        System.out.println("Total expenses: " + currency + " " + totalExpenses);
+        System.out.println("Remaining: " + currency + " " + (salary - totalExpenses));
         
 
 
