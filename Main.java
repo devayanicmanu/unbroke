@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 /**
  * UnBroke- A Genz expense tracker, mainly being built to save some money.
  * @author Devayani Chintha Manu
@@ -15,19 +16,27 @@ public class Main{
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter your salary: ");
+        System.out.print("Enter your Income: ");
         double salary = scanner.nextDouble();
 
-        String currency = "Euros";
-        System.out.println("Your salary is " + salary + " " + currency);
-        
-        
+        String currency = "€";
+        System.out.println("Your salary is " + currency + salary);
+
+        System.out.println("Do you have any fixed expenses (yes/no)");
+        String answer = scanner.next();
+
+        if (answer.equals("yes")) {
+            System.out.println("Enter the name of the expense: ");
+            System.out.println("Enter the amount: ");
+        }
+        else {
+            System.out.println("No fixed expense added.");
+        }
 
 
-        
-        
 
         scanner.close();
-
     }
+               
+
 }
