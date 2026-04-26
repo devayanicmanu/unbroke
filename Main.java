@@ -16,6 +16,11 @@ public class Main{
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Enter your name: ");
+        String userName = scanner.nextLine();
+        System.out.println("Hello " + userName + "! ");
+        System.out.println("Lets organize your Finances!");
+
         System.out.print("Enter your Income: ");
         double salary = scanner.nextDouble();
 
@@ -136,7 +141,7 @@ public class Main{
         }
 
         
-        System.out.println("\n--- MONTHLY SUMMARY ---");
+        System.out.println("\n--- " + userName.toUpperCase() + "'S MONTHLY SUMMARY ---");
         System.out.println("Income: " + currency + " " + salary);
 
         System.out.println("Fixed Expenses:");
@@ -147,11 +152,6 @@ public class Main{
         System.out.println("Savings: ");
         for (int i=0; i < savingsName.size(); i++) {
             System.out.println("  - " + savingsName.get(i) + ": " + currency + " " + savingsAmount.get(i));
-        }
-
-        System.out.println("Reminders: ");
-        for (int i=0; i<reminders.size(); i++) {
-            System.out.println("  - " + reminders.get(i));
         }
         
 
@@ -167,8 +167,10 @@ public class Main{
             System.out.println("You have no money for emergency fund! you are too broke!");
         }
 
-
-
+        System.out.println("Reminders: ");
+        for (int i=0; i<reminders.size(); i++) {
+            System.out.println("  - " + reminders.get(i));
+        }
 
         scanner.close();
     }

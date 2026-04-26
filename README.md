@@ -31,4 +31,16 @@ Built by Devayani — a 22 year old international student in Germany who got tir
 
 ### Day 3 - April 27 2026
 - Fixed Scanner buffer bug in the expenses loop
-- Learned: scanner.next() vs scanner.nextLine() and why it matters
+- Built full monthly summary — prints all expenses, savings, and remaining balance
+- Learned: scanner.next() vs scanner.nextLine() and why consistency matters
+- Learned: if and else must be directly connected, nothing in between
+- Learned: variables declared inside an if block are not accessible outside it (scope)
+
+### Day 4 - April 28 2026
+- Added grocery limit with yes/no gate
+- Added savings goals with ArrayList and do-while loop
+- Added reminders list
+- Added emergency fund auto-calculation from remaining balance
+- Learned: always declare variables before the if block if you need them in the summary
+- Learned: commit before big changes — it's a save point
+- Reached milestone: terminal v1 complete
