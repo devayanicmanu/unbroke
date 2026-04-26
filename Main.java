@@ -22,6 +22,8 @@ public class Main{
         String currency = "EUR";
         ArrayList<String> expenseNames = new ArrayList<>();
         ArrayList<Double> expenseAmounts = new ArrayList<>();
+        ArrayList<String> savingsName = new ArrayList<>();
+        ArrayList<Double> savingsAmount = new ArrayList<>();
 
         System.out.println("Your salary is " + salary + currency);
 
@@ -31,14 +33,18 @@ public class Main{
         if (answer.equals("yes")) {
             String anotherExpense = "yes";
             scanner.nextLine(); //fixes the buffer after salary input
+
             do {
                 System.out.print("Enter the name of the expense: ");
                 String expenseName = scanner.nextLine();
+
                 System.out.print("Enter the amount: ");
                 Double expenseAmount = scanner.nextDouble();
                 scanner.nextLine(); //clears buffer after each amount
+
                 expenseNames.add(expenseName);
                 expenseAmounts.add(expenseAmount);
+
                 System.out.print("Do you have another expense? (yes/no)");
                 anotherExpense = scanner.nextLine();
 
@@ -46,7 +52,70 @@ public class Main{
 
         } else {
             System.out.println("No fixed expense added.");
+            scanner.nextLine();
         }
+
+        
+
+        double totalExpenses = 0;
+        for (int i = 0; i < expenseAmounts.size(); i++) {
+            totalExpenses += expenseAmounts.get(i);
+        }
+
+        double remaining = salary - totalExpenses;
+
+        double groceryLimit = 0;
+
+        System.out.print("Do you want to set a grocery limit? (yes/no): ");
+        String groceryAnswer = scanner.nextLine();
+
+        if (groceryAnswer.equals("yes")) {
+
+            System.out.print("Enter your grocery Limit: ");
+            groceryLimit = scanner.nextDouble();
+            scanner.nextLine();
+
+            remaining = remaining - groceryLimit;
+
+            System.out.println("Your grocery limit is "+ groceryLimit + currency);
+
+        } else {
+
+            System.out.println("No grocery limit added");
+
+        }
+
+        System.out.print("Do you want to save up for something? (yes/no) ");
+        String savingsAnswer = scanner.nextLine();
+
+        if (savingsAnswer.equals("yes")) {
+
+            do{
+                System.out.print("What do you want to save money for? ");
+                String savingName = scanner.nextLine();
+
+                System.out.print("Enter the amount you want to save per month: ");
+                double savingAmount = scanner.nextDouble();
+                scanner.nextLine();
+
+                savingsName.add(savingName);
+
+                savingsAmount.add(savingAmount);
+
+                System.out.print("Do you have another thing to save for? ");
+                savingsAnswer = scanner.nextLine();
+
+            } while (savingsAnswer.equals("yes"));
+        }  else {
+            System.out.println("No savings set! ");
+        }    
+        
+        double totalSavings = 0;
+        for (int i = 0; i < savingsAmount.size(); i++) {
+            totalSavings += savingsAmount.get(i);
+        }
+        remaining = remaining - totalSavings;
+
         
         System.out.println("\n--- MONTHLY SUMMARY ---");
         System.out.println("Income: " + currency + " " + salary);
@@ -55,13 +124,19 @@ public class Main{
         for (int i = 0; i < expenseNames.size(); i++) {
             System.out.println("  - " + expenseNames.get(i) + ": " + currency + " " + expenseAmounts.get(i));
         }
-        double totalExpenses = 0;
-        for (int i = 0; i < expenseAmounts.size(); i++) {
-            totalExpenses += expenseAmounts.get(i);
+
+        System.out.println("Savings: ");
+        for (int i=0; i < savingsName.size(); i++) {
+            System.out.println("  - " + savingsName.get(i) + ": " + currency + " " + savingsAmount.get(i));
         }
-        System.out.println("Total expenses: " + currency + " " + totalExpenses);
-        System.out.println("Remaining: " + currency + " " + (salary - totalExpenses));
+
         
+
+        System.out.println("Total expenses: " + currency + " " + totalExpenses);
+        System.out.println("Grocery limit: " + currency + " " + groceryLimit);
+        System.out.println("Total savings: " + currency + " " + totalSavings);
+        System.out.println("Remaining: " + currency + " " + remaining);
+
 
 
 

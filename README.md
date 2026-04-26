@@ -1,5 +1,5 @@
 # Unbroke 💸
-A personal finance tracker built for students in Germany, because being broke is not the vibe.
+A personal finance tracker built for students in Germany, because being broke and not knowing where the money went.. sucks.
 
 ## About
 Built by Devayani — a 22 year old international student in Germany who got tired of not knowing where her money goes. This app is dedicated to  every student who has ever checked their bank account and immediately regretted it.
