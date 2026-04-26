@@ -24,6 +24,7 @@ public class Main{
         ArrayList<Double> expenseAmounts = new ArrayList<>();
         ArrayList<String> savingsName = new ArrayList<>();
         ArrayList<Double> savingsAmount = new ArrayList<>();
+        ArrayList<String> reminders = new ArrayList<>();
 
         System.out.println("Your salary is " + salary + currency);
 
@@ -74,10 +75,13 @@ public class Main{
             System.out.print("Enter your grocery Limit: ");
             groceryLimit = scanner.nextDouble();
             scanner.nextLine();
+            
+            
 
             remaining = remaining - groceryLimit;
 
             System.out.println("Your grocery limit is "+ groceryLimit + currency);
+            
 
         } else {
 
@@ -116,6 +120,21 @@ public class Main{
         }
         remaining = remaining - totalSavings;
 
+        System.out.print("Do you have any reminders for yourself? (yes/no): ");
+        String reminderAnswer = scanner.nextLine();
+
+        if (reminderAnswer.equals("yes")) {
+            do {
+                System.out.print("Enter your reminder: ");
+                String reminder = scanner.nextLine();
+                reminders.add(reminder);
+                System.out.print("Do you have another reminder? (yes/no): ");
+                reminderAnswer = scanner.nextLine();
+            } while (reminderAnswer.equals("yes"));
+        } else {
+            System.out.println("No reminders added.");
+        }
+
         
         System.out.println("\n--- MONTHLY SUMMARY ---");
         System.out.println("Income: " + currency + " " + salary);
@@ -130,12 +149,23 @@ public class Main{
             System.out.println("  - " + savingsName.get(i) + ": " + currency + " " + savingsAmount.get(i));
         }
 
+        System.out.println("Reminders: ");
+        for (int i=0; i<reminders.size(); i++) {
+            System.out.println("  - " + reminders.get(i));
+        }
         
 
         System.out.println("Total expenses: " + currency + " " + totalExpenses);
         System.out.println("Grocery limit: " + currency + " " + groceryLimit);
         System.out.println("Total savings: " + currency + " " + totalSavings);
-        System.out.println("Remaining: " + currency + " " + remaining);
+        
+        if (remaining > 0) {
+            System.out.println("You can add " + currency + " " + remaining + 
+                " as emergency fund! "
+            );
+        } else {
+            System.out.println("You have no money for emergency fund! you are too broke!");
+        }
 
 
 
