@@ -37,10 +37,14 @@ Built by Devayani — a 22 year old international student in Germany who got tir
 - Learned: variables declared inside an if block are not accessible outside it (scope)
 
 ### Day 4 - April 28 2026
-- Added grocery limit with yes/no gate
-- Added savings goals with ArrayList and do-while loop
-- Added reminders list
-- Added emergency fund auto-calculation from remaining balance
+- Added grocery limit, savings goals, reminders and emergency fund
+- Added username personalisation — summary now greets you by name
+- Refactored entire app into methods — collectExpenses, collectSavings, collectReminders
+- Created first OOP classes — Expense.java and Savings.java
+- Replaced two ArrayLists per feature with one ArrayList of objects
+- Added exception handling with try-catch — app no longer crashes on bad input
+- Learned the DRY principle — wrote one reusable getValidDouble() method instead of repeating try-catch everywhere
+- Learned: static vs non-static, constructors, getters, private variables
 - Learned: always declare variables before the if block if you need them in the summary
 - Learned: commit before big changes — it's a save point
-- Reached milestone: terminal v1 complete
+- Milestone: terminal v2 complete — refactored, object oriented, handles bad input
