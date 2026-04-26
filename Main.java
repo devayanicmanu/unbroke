@@ -25,19 +25,17 @@ public class Main{
         double salary = scanner.nextDouble();
 
         String currency = "EUR";
-        ArrayList<String> expenseNames = new ArrayList<>();
-        ArrayList<Double> expenseAmounts = new ArrayList<>();
-        ArrayList<String> savingsName = new ArrayList<>();
-        ArrayList<Double> savingsAmount = new ArrayList<>();
+        ArrayList<Expense> expenses = new ArrayList<>();
+        ArrayList<Savings> savings = new ArrayList<>();
         ArrayList<String> reminders = new ArrayList<>();
 
         System.out.println("Your salary is " + salary + currency);
 
-        collectExpenses(scanner, expenseNames, expenseAmounts);
+        collectExpenses(scanner, expenses);
 
         double totalExpenses = 0;
-        for (int i = 0; i < expenseAmounts.size(); i++) {
-            totalExpenses += expenseAmounts.get(i);
+        for (int i = 0; i < expenses.size(); i++) {
+            totalExpenses += expenses.get(i).getExpenseAmount();
         }
 
         double remaining = salary - totalExpenses;
@@ -61,12 +59,12 @@ public class Main{
             System.out.println("No grocery limit added");
         }
 
-        collectSavings(scanner, savingsName, savingsAmount);
+        collectSavings(scanner, savings);
 
         double totalSavings = 0;
 
-        for (int i = 0; i < savingsAmount.size(); i++) {
-            totalSavings += savingsAmount.get(i);
+        for (int i = 0; i < savings.size(); i++) {
+            totalSavings += savings.get(i).getSavingsAmount();
         }
 
         remaining = remaining - totalSavings;
@@ -78,13 +76,14 @@ public class Main{
         System.out.println("Income: " + currency + " " + salary);
 
         System.out.println("Fixed Expenses:");
-        for (int i = 0; i < expenseNames.size(); i++) {
-            System.out.println("  - " + expenseNames.get(i) + ": " + currency + " " + expenseAmounts.get(i));
+        for (int i = 0; i < expenses.size(); i++) {
+            System.out.println("  - " + expenses.get(i).getExpenseName() + ": " + 
+            currency + " " + expenses.get(i).getExpenseAmount());
         }
 
         System.out.println("Savings: ");
-        for (int i=0; i < savingsName.size(); i++) {
-            System.out.println("  - " + savingsName.get(i) + ": " + currency + " " + savingsAmount.get(i));
+        for (int i=0; i < savings.size(); i++) {
+            System.out.println("  - " + savings.get(i).getSavingsName() + ": " + currency + " " + savings.get(i).getSavingsAmount());
         }
         
 
@@ -108,7 +107,7 @@ public class Main{
         scanner.close();
     }
 
-    static void collectExpenses (Scanner scanner , ArrayList<String> expenseNames, ArrayList<Double> expenseAmounts) {
+    static void collectExpenses (Scanner scanner , ArrayList <Expense> expenses) {
 
         System.out.print("Do you have any fixed expenses (yes/no)");
         String answer = scanner.next();
@@ -125,8 +124,7 @@ public class Main{
                 Double expenseAmount = scanner.nextDouble();
                 scanner.nextLine(); //clears buffer after each amount
 
-                expenseNames.add(expenseName);
-                expenseAmounts.add(expenseAmount);
+                expenses.add(new Expense(expenseName, expenseAmount));
 
                 System.out.print("Do you have another expense? (yes/no)");
                 anotherExpense = scanner.nextLine();
@@ -139,7 +137,7 @@ public class Main{
         }
     }
          
-    static void collectSavings (Scanner scanner, ArrayList <String> savingsName, ArrayList<Double> savingsAmount) {
+    static void collectSavings (Scanner scanner, ArrayList <Savings> savings) {
         System.out.print("Do you want to save up for something? (yes/no) ");
         String savingsAnswer = scanner.nextLine();
 
@@ -153,9 +151,7 @@ public class Main{
                 double savingAmount = scanner.nextDouble();
                 scanner.nextLine();
 
-                savingsName.add(savingName);
-
-                savingsAmount.add(savingAmount);
+                savings.add(new Savings(savingName, savingAmount));
 
                 System.out.print("Do you have another thing to save for? ");
                 savingsAnswer = scanner.nextLine();
