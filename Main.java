@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+
 /**
  * UnBroke- A Genz expense tracker, mainly being built to save some money.
  * @author Devayani Chintha Manu
@@ -21,8 +23,7 @@ public class Main{
         System.out.println("Hello " + userName + "! ");
         System.out.println("Lets organize your Finances!");
 
-        System.out.print("Enter your Income: ");
-        double salary = scanner.nextDouble();
+        double salary = getValidDouble(scanner, "Enter your Income: ");
 
         String currency = "EUR";
         ArrayList<Expense> expenses = new ArrayList<>();
@@ -46,8 +47,7 @@ public class Main{
 
         if (groceryAnswer.equals("yes")) {
 
-            System.out.print("Enter your grocery Limit: ");
-            groceryLimit = scanner.nextDouble();
+            groceryLimit = getValidDouble(scanner, "Enter your grocery Limit: ");
             scanner.nextLine();
 
             remaining = remaining - groceryLimit;
@@ -120,9 +120,8 @@ public class Main{
                 System.out.print("Enter the name of the expense: ");
                 String expenseName = scanner.nextLine();
 
-                System.out.print("Enter the amount: ");
-                Double expenseAmount = scanner.nextDouble();
-                scanner.nextLine(); //clears buffer after each amount
+                double expenseAmount = getValidDouble(scanner, "Enter the amount: ");
+                scanner.nextLine();
 
                 expenses.add(new Expense(expenseName, expenseAmount));
 
@@ -147,13 +146,12 @@ public class Main{
                 System.out.print("What do you want to save money for? ");
                 String savingName = scanner.nextLine();
 
-                System.out.print("Enter the amount you want to save per month: ");
-                double savingAmount = scanner.nextDouble();
+                double savingAmount = getValidDouble(scanner, "Enter the amount you want to save per month: ");
                 scanner.nextLine();
 
                 savings.add(new Savings(savingName, savingAmount));
 
-                System.out.print("Do you have another thing to save for? ");
+                System.out.print("Do you have another thing to save for? (yes/no) ");
                 savingsAnswer = scanner.nextLine();
 
             } while (savingsAnswer.equals("yes"));
@@ -180,4 +178,19 @@ public class Main{
     }
     }
 
+    static double getValidDouble(Scanner scanner, String prompt) {
+        double value = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print(prompt);
+                value = scanner.nextDouble();
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!");
+                scanner.next();
+            }
+        }
+        return value;
+    }
 }
