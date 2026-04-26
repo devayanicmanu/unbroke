@@ -33,35 +33,7 @@ public class Main{
 
         System.out.println("Your salary is " + salary + currency);
 
-        System.out.print("Do you have any fixed expenses (yes/no)");
-        String answer = scanner.next();
-
-        if (answer.equals("yes")) {
-            String anotherExpense = "yes";
-            scanner.nextLine(); //fixes the buffer after salary input
-
-            do {
-                System.out.print("Enter the name of the expense: ");
-                String expenseName = scanner.nextLine();
-
-                System.out.print("Enter the amount: ");
-                Double expenseAmount = scanner.nextDouble();
-                scanner.nextLine(); //clears buffer after each amount
-
-                expenseNames.add(expenseName);
-                expenseAmounts.add(expenseAmount);
-
-                System.out.print("Do you have another expense? (yes/no)");
-                anotherExpense = scanner.nextLine();
-
-            } while (anotherExpense.equals("yes"));
-
-        } else {
-            System.out.println("No fixed expense added.");
-            scanner.nextLine();
-        }
-
-        
+        collectExpenses(scanner, expenseNames, expenseAmounts);
 
         double totalExpenses = 0;
         for (int i = 0; i < expenseAmounts.size(); i++) {
@@ -71,7 +43,6 @@ public class Main{
         double remaining = salary - totalExpenses;
 
         double groceryLimit = 0;
-
         System.out.print("Do you want to set a grocery limit? (yes/no): ");
         String groceryAnswer = scanner.nextLine();
 
@@ -80,8 +51,6 @@ public class Main{
             System.out.print("Enter your grocery Limit: ");
             groceryLimit = scanner.nextDouble();
             scanner.nextLine();
-            
-            
 
             remaining = remaining - groceryLimit;
 
@@ -89,56 +58,20 @@ public class Main{
             
 
         } else {
-
             System.out.println("No grocery limit added");
-
         }
 
-        System.out.print("Do you want to save up for something? (yes/no) ");
-        String savingsAnswer = scanner.nextLine();
+        collectSavings(scanner, savingsName, savingsAmount);
 
-        if (savingsAnswer.equals("yes")) {
-
-            do{
-                System.out.print("What do you want to save money for? ");
-                String savingName = scanner.nextLine();
-
-                System.out.print("Enter the amount you want to save per month: ");
-                double savingAmount = scanner.nextDouble();
-                scanner.nextLine();
-
-                savingsName.add(savingName);
-
-                savingsAmount.add(savingAmount);
-
-                System.out.print("Do you have another thing to save for? ");
-                savingsAnswer = scanner.nextLine();
-
-            } while (savingsAnswer.equals("yes"));
-        }  else {
-            System.out.println("No savings set! ");
-        }    
-        
         double totalSavings = 0;
+
         for (int i = 0; i < savingsAmount.size(); i++) {
             totalSavings += savingsAmount.get(i);
         }
+
         remaining = remaining - totalSavings;
 
-        System.out.print("Do you have any reminders for yourself? (yes/no): ");
-        String reminderAnswer = scanner.nextLine();
-
-        if (reminderAnswer.equals("yes")) {
-            do {
-                System.out.print("Enter your reminder: ");
-                String reminder = scanner.nextLine();
-                reminders.add(reminder);
-                System.out.print("Do you have another reminder? (yes/no): ");
-                reminderAnswer = scanner.nextLine();
-            } while (reminderAnswer.equals("yes"));
-        } else {
-            System.out.println("No reminders added.");
-        }
+        collectReminders(scanner, reminders);
 
         
         System.out.println("\n--- " + userName.toUpperCase() + "'S MONTHLY SUMMARY ---");
@@ -174,6 +107,81 @@ public class Main{
 
         scanner.close();
     }
-               
+
+    static void collectExpenses (Scanner scanner , ArrayList<String> expenseNames, ArrayList<Double> expenseAmounts) {
+
+        System.out.print("Do you have any fixed expenses (yes/no)");
+        String answer = scanner.next();
+
+        if (answer.equals("yes")) {
+            String anotherExpense = "yes";
+            scanner.nextLine(); //fixes the buffer after salary input
+
+            do {
+                System.out.print("Enter the name of the expense: ");
+                String expenseName = scanner.nextLine();
+
+                System.out.print("Enter the amount: ");
+                Double expenseAmount = scanner.nextDouble();
+                scanner.nextLine(); //clears buffer after each amount
+
+                expenseNames.add(expenseName);
+                expenseAmounts.add(expenseAmount);
+
+                System.out.print("Do you have another expense? (yes/no)");
+                anotherExpense = scanner.nextLine();
+
+            } while (anotherExpense.equals("yes"));
+
+        } else {
+            System.out.println("No fixed expense added.");
+            scanner.nextLine();
+        }
+    }
+         
+    static void collectSavings (Scanner scanner, ArrayList <String> savingsName, ArrayList<Double> savingsAmount) {
+        System.out.print("Do you want to save up for something? (yes/no) ");
+        String savingsAnswer = scanner.nextLine();
+
+        if (savingsAnswer.equals("yes")) {
+
+            do{
+                System.out.print("What do you want to save money for? ");
+                String savingName = scanner.nextLine();
+
+                System.out.print("Enter the amount you want to save per month: ");
+                double savingAmount = scanner.nextDouble();
+                scanner.nextLine();
+
+                savingsName.add(savingName);
+
+                savingsAmount.add(savingAmount);
+
+                System.out.print("Do you have another thing to save for? ");
+                savingsAnswer = scanner.nextLine();
+
+            } while (savingsAnswer.equals("yes"));
+        }  else {
+            System.out.println("No savings set! ");
+        }
+    }
+
+    static void collectReminders(Scanner scanner, ArrayList<String> reminders) {
+
+    System.out.print("Do you have any reminders for yourself? (yes/no): ");
+    String reminderAnswer = scanner.nextLine();
+
+    if (reminderAnswer.equals("yes")) {
+        do {
+            System.out.print("Enter your reminder: ");
+            String reminder = scanner.nextLine();
+            reminders.add(reminder);
+            System.out.print("Do you have another reminder? (yes/no): ");
+            reminderAnswer = scanner.nextLine();
+        } while (reminderAnswer.equals("yes"));
+    } else {
+        System.out.println("No reminders added.");
+    }
+    }
 
 }
