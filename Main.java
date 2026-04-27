@@ -42,13 +42,12 @@ public class Main{
         double remaining = salary - totalExpenses;
 
         double groceryLimit = 0;
-        System.out.print("Do you want to set a grocery limit? (yes/no): ");
-        String groceryAnswer = scanner.nextLine();
+
+        String groceryAnswer = getValidYesNo(scanner, "Do you want to set a grocery limit?  ");
 
         if (groceryAnswer.equals("yes")) {
 
             groceryLimit = getValidDouble(scanner, "Enter your grocery Limit: ");
-            scanner.nextLine();
 
             remaining = remaining - groceryLimit;
 
@@ -113,24 +112,22 @@ public class Main{
 
     static void collectExpenses (Scanner scanner , ArrayList <Expense> expenses) {
 
-        System.out.print("Do you have any fixed expenses (yes/no)");
-        String answer = scanner.next();
+        String answer = getValidYesNo(scanner, "Do you have any fixed expenses? ");
 
         if (answer.equals("yes")) {
             String anotherExpense = "yes";
-            scanner.nextLine(); //fixes the buffer after salary input
+            
 
             do {
                 System.out.print("Enter the name of the expense: ");
                 String expenseName = scanner.nextLine();
 
                 double expenseAmount = getValidDouble(scanner, "Enter the amount: ");
-                scanner.nextLine();
+                
 
                 expenses.add(new Expense(expenseName, expenseAmount));
 
-                System.out.print("Do you have another expense? (yes/no)");
-                anotherExpense = scanner.nextLine();
+                anotherExpense = getValidYesNo(scanner, "Do you have another expense? (yes/no)");
 
             } while (anotherExpense.equals("yes"));
 
@@ -141,8 +138,7 @@ public class Main{
     }
          
     static void collectSavings (Scanner scanner, ArrayList <Savings> savings) {
-        System.out.print("Do you want to save up for something? (yes/no) ");
-        String savingsAnswer = scanner.nextLine();
+        String savingsAnswer = getValidYesNo(scanner, "Do you want to save up for something? (yes/no) ");
 
         if (savingsAnswer.equals("yes")) {
 
@@ -151,12 +147,11 @@ public class Main{
                 String savingName = scanner.nextLine();
 
                 double savingAmount = getValidDouble(scanner, "Enter the amount you want to save per month: ");
-                scanner.nextLine();
+                
 
                 savings.add(new Savings(savingName, savingAmount));
 
-                System.out.print("Do you have another thing to save for? (yes/no) ");
-                savingsAnswer = scanner.nextLine();
+                savingsAnswer = getValidYesNo(scanner, "Do you have another thing to save for? (yes/no) ");
 
             } while (savingsAnswer.equals("yes"));
         }  else {
@@ -166,16 +161,14 @@ public class Main{
 
     static void collectReminders(Scanner scanner, ArrayList<String> reminders) {
 
-    System.out.print("Do you have any reminders for yourself? (yes/no): ");
-    String reminderAnswer = scanner.nextLine();
+    String reminderAnswer = getValidYesNo(scanner, "Do you have any reminders for yourself? (yes/no): ");
 
     if (reminderAnswer.equals("yes")) {
         do {
             System.out.print("Enter your reminder: ");
             String reminder = scanner.nextLine();
             reminders.add(reminder);
-            System.out.print("Do you have another reminder? (yes/no): ");
-            reminderAnswer = scanner.nextLine();
+            reminderAnswer = getValidYesNo(scanner, "Do you have another reminder? (yes/no): ");
         } while (reminderAnswer.equals("yes"));
     } else {
         System.out.println("No reminders added.");
@@ -189,6 +182,7 @@ public class Main{
             try {
                 System.out.print(prompt);
                 value = scanner.nextDouble();
+                scanner.nextLine();
                 validInput = true;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number!");
@@ -197,4 +191,19 @@ public class Main{
         }
         return value;
     }
+
+    static String getValidYesNo(Scanner scanner, String prompt) {
+        String input = "";
+        while (!input.startsWith("y") && !input.startsWith("n")) {
+            System.out.print(prompt);
+            input = scanner.nextLine().trim().toLowerCase();
+            if (!input.startsWith("y") && !input.startsWith("n")) {
+                System.out.println("Please enter yes or no!");
+            }
+        }
+        return input.startsWith("y") ? "yes" : "no";
+    } 
 }
+
+
+
