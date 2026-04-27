@@ -99,6 +99,10 @@ public class Main{
             System.out.println("You have no money for emergency fund! you are too broke!");
         }
 
+        double daysToBroke= remaining /(totalExpenses/30);
+        System.out.printf("At this rate, you have %.0f days till you're broke%n", daysToBroke);
+
+
         System.out.println("Reminders: ");
         for (int i=0; i<reminders.size(); i++) {
             System.out.println("  - " + reminders.get(i));
