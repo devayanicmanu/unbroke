@@ -70,6 +70,21 @@ public class Main{
 
         collectReminders(scanner, reminders);
 
+
+        String buyAnswer = getValidYesNo(scanner, "Do you want to buy something? ");
+         if (buyAnswer.startsWith("y")) {
+            System.out.print("What do you want to buy? ");
+            String buyItem = scanner.nextLine();
+            double price = getValidDouble(scanner, "How much does it cost? ");
+            double percentage = (price / remaining) * 100;
+            double dailyBudget = remaining/30;
+            double daysWorth = price / dailyBudget;
+            System.out.printf("That's %.1f%% of your remaining budget%n", percentage);
+            System.out.printf("You would only have " + currency + " %.2f left for this month%n", (remaining - price));
+            System.out.printf("That's %.1f days worth of budget!%n", daysWorth);
+
+         }
+
         
         System.out.println("\n--- " + userName.toUpperCase() + "'S MONTHLY SUMMARY ---");
         System.out.println("Income: " + currency + " " + salary);
