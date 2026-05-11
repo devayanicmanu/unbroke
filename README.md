@@ -45,6 +45,21 @@ Built by Devayani — a 22 year old international student in Germany who got tir
 - Added exception handling with try-catch — app no longer crashes on bad input
 - Learned the DRY principle — wrote one reusable getValidDouble() method instead of repeating try-catch everywhere
 - Learned: static vs non-static, constructors, getters, private variables
-- Learned: always declare variables before the if block if you need them in the summary
 - Learned: commit before big changes — it's a save point
 - Milestone: terminal v2 complete — refactored, object oriented, handles bad input
+
+### Day 5 - April 27 2026
+- Added broke date calculator
+- Built getValidYesNo() method with fuzzy matching — accepts "yep", "yeah", "y" etc
+- Added exception handling for all yes/no inputs across the app
+- Learned: .startsWith() vs .equals() for flexible input matching
+- Learned: .toLowerCase() and .trim() for cleaner user input handling
+
+### Day 6 - April 28 2026
+- Built "before you buy" calculator
+- Shows percentage of remaining budget, days worth of spending, and balance after purchase
+- Learned: printf formatting with %.1f and %.2f for clean decimal output
+
+### Day 7 - May 11 2026
+- Back after a two week break
+- Picking up where I left off — web version starts now
